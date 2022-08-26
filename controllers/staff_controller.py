@@ -222,7 +222,7 @@ def get_ebook_id(ebook_id):
                 return jsonify({"message": "All fields are required"})
 
         elif request.method == "DELETE":
-            ebook = Ebook.query.filter_by(id=ebook_id).first()
+            ebook = Ebook.query.filter_by(id=ebook_id)
             if ebook is None:
                 return jsonify({"message": "No such data"})
             else:
