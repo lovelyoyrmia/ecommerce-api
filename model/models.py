@@ -23,20 +23,6 @@ class User(db.Model, UserMixin):
         return f"User {self.name}, {self.name}, {self.email}, {self.phone_number}, {self.address}, {self.is_admin}"
 
 
-# class Customer(db.Model, UserMixin):
-#     __tablename__ = "customer"
-
-#     id = db.Column(db.Integer, primary_key=True)
-#     name = db.Column(db.String(150))
-#     email = db.Column(db.String(50))
-#     phone_number = db.Column(db.Integer)
-#     address = db.Column(db.String)
-#     password = db.Column(db.String(255))
-
-#     def __repr__(self):
-#         return f"Customer {self.name}, {self.name}, {self.email}, {self.phone_number}, {self.address}"
-
-
 class Orders(db.Model):
     __tablename__ = "orders"
 
