@@ -10,7 +10,7 @@ from routes.customer_router import customer_router
 app = create_app()
 
 app.app_context().push()
-db.create_all(app=create_app())
+db.create_all(app=app)
 login_manager = LoginManager(app)
 
 app.register_blueprint(staff_router, url_prefix="/admin")
