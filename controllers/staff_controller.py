@@ -124,6 +124,7 @@ def ebook():
                     db.session.commit()
 
                     data = {
+                        "id_buku": ebook.id,
                         "judul": ebook.judul,
                         "penulis": ebook.penulis,
                         "sinopsis": ebook.sinopsis,
@@ -145,6 +146,7 @@ def ebook():
             results = []
             for book in ebooks:
                 data = {}
+                data["id_buku"] = book.id
                 data["judul"] = book.judul
                 data["penulis"] = book.penulis
                 data["sinopsis"] = book.sinopsis
@@ -168,6 +170,7 @@ def get_ebook_id(ebook_id):
                 return jsonify({"message": "No such data"})
             else:
                 data = {
+                    "id_buku": ebook.id,
                     "judul": ebook.judul,
                     "penulis": ebook.penulis,
                     "sinopsis": ebook.sinopsis,
@@ -206,6 +209,7 @@ def get_ebook_id(ebook_id):
                     db.session.commit()
 
                     data = {
+                        "id_buku": ebook_id,
                         "judul": ebook.judul,
                         "penulis": ebook.penulis,
                         "sinopsis": ebook.sinopsis,
