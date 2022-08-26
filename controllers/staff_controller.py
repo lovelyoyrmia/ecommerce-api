@@ -223,11 +223,13 @@ def get_ebook_id(ebook_id):
 
         elif request.method == "DELETE":
             ebook = Ebook.query.filter_by(id=ebook_id)
-            if ebook is None:
+
+            if ebook.first() is None:
                 return jsonify({"message": "No such data"})
             else:
                 ebook.delete()
                 db.session.commit()
-                return jsonify({"message": "Successfully deleted"})
+                ebook = ebook.first()
+                return jsonify({"message": "Successfully deleted", "data": ebook})
     else:
         return jsonify({"message": "Not Allowed"}), 401
