@@ -82,10 +82,14 @@ def order():
                 if type(ebook_id) is str:
                     return jsonify({"message": "Id should be numbers"})
                 else:
-                    orders = Orders(ebook_id=int(ebook_id), customer_id=customer_id)
-                    db.session.add(orders)
-                    db.session.commit()
-                    return jsonify({"message": "Added Successfully"})
+                    ebook = Ebook.query.filter_by(id=ebook_id).first()
+                    if ebook is None:
+                        return jsonify({"message": "Book not  found"})
+                    else:
+                        orders = Orders(ebook_id=int(ebook_id), customer_id=customer_id)
+                        db.session.add(orders)
+                        db.session.commit()
+                        return jsonify({"message": "Added Successfully"})
         else:
             return jsonify({"message": "Only customer can access"}), 401
 
