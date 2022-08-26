@@ -33,9 +33,7 @@ def register():
                     return jsonify({"message": "Email is invalid"})
                 else:
                     _hash_password = generate_password_hash(password)
-                    print(_hash_password)
                     user = User.query.filter_by(email=email, is_admin=False).first()
-                    print(user)
                     if user and not user.is_admin:
                         return jsonify({"message": "Email already exists"})
                     else:

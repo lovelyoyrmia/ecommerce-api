@@ -29,7 +29,7 @@ class Orders(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     ordered_date = db.Column(db.DateTime, default=datetime.utcnow())
     customer_id = db.Column(db.Integer, db.ForeignKey("user.id"))
-    ebook_id = db.Column(db.Integer, db.ForeignKey("ebook.id"))
+    ebook_id = db.Column(db.Integer, db.ForeignKey("ebook.id", ondelete="CASCADE"))
 
     def __repr__(self):
         return f"Orders {self.ordered_date}, {self.order_ebook}"
@@ -45,3 +45,11 @@ class Ebook(db.Model):
     harga = db.Column(db.Integer)
     image_url = db.Column(db.String(255))
     content_url = db.Column(db.String(255))
+    order_id = db.relationship(
+        "Orders",
+        cascade="all,delete",
+        passive_deletes=True,
+    )
+
+    def __repr__(self):
+        return f"User {self.judul}, {self.penulis}, {self.sinopsis}, {self.harga}, {self.image_url}, {self.content_url}"

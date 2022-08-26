@@ -21,7 +21,6 @@ def register():
         address = req_data["address"]
         password = req_data["password"]
         _hash_password = generate_password_hash(password)
-        print(_hash_password)
         if (
             name != ""
             and email != ""
@@ -33,7 +32,6 @@ def register():
                 return jsonify({"message": "Email is invalid"})
             else:
                 _hash_password = generate_password_hash(password)
-                print(_hash_password)
                 user = User.query.filter_by(email=email).first()
                 if user and user.is_admin:
                     return jsonify({"message": "Email already exists"})
@@ -224,8 +222,8 @@ def get_ebook_id(ebook_id):
                 return jsonify({"message": "All fields are required"})
 
         elif request.method == "DELETE":
-            ebook = Ebook.query.filter_by(id=ebook_id)
-            if not ebook:
+            ebook = Ebook.query.filter_by(id=ebook_id).first()
+            if ebook is None:
                 return jsonify({"message": "No such data"})
             else:
                 ebook.delete()
